@@ -12,7 +12,11 @@
 
 ## 拥有自己的 Zerotier 网络
 
-#TODO
+访问 [Zerotier](https://www.zerotier.com/) 点击 `Sign Up`注册自己 ZT 账号。
+
+注册登录后，显示如下界面点击`Create A Network`这样你就拥有了自己的 ZT 网络。
+
+![a](./img/zt_02.png)
 
 ## 下载程序代码并运行它
 
@@ -22,4 +26,5 @@
 4. 插卡开机；
 5. 在用户界面选择`APPS`->`APPS`->选择对应的存储卡->`Zerotier-已关闭`并运行；
 6. 等待运行完成即可。
+7. 如果是第一次加入 ZT 网络，需要登录 Zerotier 官网，在 ZT 网络的`Members`选项卡中允许连入。
 
