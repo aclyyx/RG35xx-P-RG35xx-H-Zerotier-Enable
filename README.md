@@ -16,7 +16,7 @@
 
 ## 下载程序代码并运行它
 
-1. 下载本项目中的 [RG35xxH]([RG35xx-P-RG35xx-H-Zerotier-Enable/RG35xxH at main · aclyyx/RG35xx-P-RG35xx-H-Zerotier-Enable (github.com)](https://github.com/aclyyx/RG35xx-P-RG35xx-H-Zerotier-Enable/tree/main/RG35xxH)) 文件夹里的内容；
+1. 下载本项目中的 [RG35xxH](https://github.com/aclyyx/RG35xx-P-RG35xx-H-Zerotier-Enable/tree/main/RG35xxH) 文件夹里的内容；
 2. 编辑 `RG35xxH` 文件夹中的 `zt-network-id.txt`文件，将 Zerotier 的`网络ID`(`NETWORK ID`)写在里面并保存；
 3. 将下载的文件及文件夹拷贝到 TF1 或 TF2 存储卡的 `/Roms/APPS`文件夹中；
 4. 插卡开机；
