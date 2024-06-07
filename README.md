@@ -2,6 +2,8 @@
 
 本项目用于在安伯尼克(Anbernic) RG35xx H 的原厂系统中添加 Zerotier(ZT) 服务，并可以控制打开或关闭 ZT 服务的应用程序。
 
+__注：__本项目理论上同时支持 RG35xx-H 和 RG35xx-Plus，但未在RG35xx-Plus上测试。
+
 # 写在前面
 
 首先，你需要了解什么是 Zerotier(ZT)，ZT是一个远程组件局域网的解决方案，而且它是跨平台的，不仅可以在 Windows、MacOS、iOS、Android，也可以在 Linux 上安装运行。
