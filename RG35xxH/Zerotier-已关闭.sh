@@ -5,8 +5,8 @@
 progdir=$(cd $(dirname $0); pwd)
 networkId=$(cat $progdir/zt-network-id.txt)
 
-echo $networkId > $progdir/a.txt
-echo $progdir
+# echo $networkId
+# echo $progdir
 
 # 判断是否安装 zerotier
 if ! type zerotier-one >/dev/null 2>&1; then
