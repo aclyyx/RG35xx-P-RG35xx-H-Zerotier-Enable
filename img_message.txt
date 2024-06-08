@@ -1,0 +1,49 @@
+图片命名： zton 已开启画面 ztstarting / ztoff 已关闭画面 ztstopping / zt 正常启动画面 / ztnone 未安装zt画面 / ztinstalling
+
+Zerotier 尚未安装，请点击 X 按键安装
+Zerotier is not installed. Please click the X button to install
+Zerotier がインストールされていません。Xボタンをクリックしてインストールしてください。
+
+正在安装 Zerotier，请等待。
+Zerotier is being installed. Please wait.
+Zerotierをインストール中です。しばらくお待ちください。
+
+Zerotier 开关。
+Zerotier On/Off Switch.
+Zerotier オン/オフスイッチ。
+
+开 / 关
+On / Off
+開ける / 閉じる
+
+正在启动，请稍后...
+Starting up, please wait...
+起動中です。しばらくお待ちください。
+
+正在关闭，请稍后
+Shutting down, please wait.
+終了中です。しばらくお待ちください。
+
+Zerotier 已开启。
+Zerotier is ON.
+Zerotierが有効になっています。
+
+Zerotier 已关闭。
+Zerotier is OFF.
+Zerotierは無効です。
+
+按 Fn 键退出
+Press the Fn key to exit
+Fn キーを押して終了する
+
+正在离开 Zerotier，请稍后...
+Exiting Zerotier, please wait...
+Zerotier を終了しています、しばらくお待ちください...
+
+完成
+Completed
+完了しました
+
+按 B 键离开并删除 Zerotier
+B leave and remove Zerotier
+B キーを押して終了し、Zerotier を削除します
