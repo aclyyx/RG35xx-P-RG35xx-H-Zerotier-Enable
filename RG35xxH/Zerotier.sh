@@ -6,8 +6,8 @@ if [ ! -f /usr/bin/mpv ]; then
     echo "Error: The necessary playback files are missing and the program cannot run."
     exit 1
 fi
-. /mnt/mod/ctrl/configs/functions &>/dev/null 2>&1
-progdir=$(cd $(dirname $0); pwd)
+. /mnt/mod/ctrl/configs/key_config &>/dev/null
+progdir=$(dirname "$0")
 networkId=$(cat $progdir/zt-network-id.txt)
 
 # 安装 zerotier
@@ -15,19 +15,25 @@ function install_zt() {
     if ! type zerotier-one >/dev/null 2>&1; then
         echo '正在安装 Zerotier';
         sync
-        [ -z ${1} ] && mpv $rotate_28 --really-quiet --image-display-duration=3 "${progdir}/res/ztinstalling-${LANG_CUR}.png"
-        curl -s https://install.zerotier.com | bash;
+        mpv --really-quiet --image-display-duration=3 "${progdir}/res/ztinstalling-0.png"
+        if ! type curl >/dev/null 2>&1; then
+            echo '正在安装 curl';
+            apt-get update -y
+            apt install curl -y
+        fi
+        curl -s https://install.zerotier.com | bash
+        installer -pkg "${progdir}/res/ZeroTier One.pkg" -target /
         systemctl stop zerotier-one.service
         systemctl disable zerotier-one.service
         sync
-        [ -z ${1} ] && mpv $rotate_28 --really-quiet --image-display-duration=3 "${progdir}/res/zt-${LANG_CUR}.png"
+        mpv --really-quiet --image-display-duration=3 "${progdir}/res/zt-0.png"
     fi
 }
 function enable_zt() {
     if type zerotier-one >/dev/null 2>&1; then
         # 正在开启
         sync
-        [ -z ${1} ] && mpv $rotate_28 --really-quiet --image-display-duration=3 "${progdir}/res/ztstarting-${LANG_CUR}.png"
+        mpv --really-quiet --image-display-duration=3 "${progdir}/res/ztstarting-0.png"
         systemctl start zerotier-one.service
         systemctl enable zerotier-one.service
         echo '已启动 Zerotier 服务';
@@ -47,26 +53,26 @@ function enable_zt() {
         fi
         status_zt $1
         sync
-        [ -z ${1} ] && mpv $rotate_28 --really-quiet --image-display-duration=3 "${progdir}/res/ztdone-${LANG_CUR}.png"
+        mpv --really-quiet --image-display-duration=3 "${progdir}/res/ztdone-0.png"
     fi
 }
 function disable_zt() {
     if type zerotier-one >/dev/null 2>&1; then
         # 正在关闭
         sync
-        [ -z ${1} ] && mpv $rotate_28 --really-quiet --image-display-duration=3 "${progdir}/res/ztstopping-${LANG_CUR}.png"
+        mpv --really-quiet --image-display-duration=3 "${progdir}/res/ztstopping-0.png"
         systemctl stop zerotier-one.service
         systemctl disable zerotier-one.service
         echo '已停止 Zerotier 服务';
         status_zt $1
         sync
-        [ -z ${1} ] && mpv $rotate_28 --really-quiet --image-display-duration=3 "${progdir}/res/ztdone-${LANG_CUR}.png"
+        mpv --really-quiet --image-display-duration=3 "${progdir}/res/ztdone-0.png"
     fi
 }
 function leave_zt() {
     # 正在离开
     sync
-    [ -z ${1} ] && mpv $rotate_28 --really-quiet --image-display-duration=3 "${progdir}/res/ztleaving-${LANG_CUR}.png"
+    mpv --really-quiet --image-display-duration=3 "${progdir}/res/ztleaving-0.png"
     # 判断是否启动zt服务
     if ! systemctl status zerotier-one.service >/dev/null 2>&1; then
         systemctl start zerotier-one.service
@@ -86,14 +92,10 @@ function leave_zt() {
 function status_zt() {
     if systemctl status zerotier-one.service >/dev/null 2>&1; then
         echo 'Zerotier启动成功';
-        [ $LANG_CUR -eq 0 ] && mv "$0" "$progdir/Zerotier-已开启.sh"
-        [ $LANG_CUR -eq 3 ] && mv "$0" "$progdir/Zerotier-オープン.sh"
-        [ $LANG_CUR -eq 2 ] && mv "$0" "$progdir/Zerotier-ON.sh"
+        mv "$0" "$progdir/Zerotier-已开启.sh"
     else
         echo 'Zerotier停止完成';
-        [ $LANG_CUR -eq 0 ] && mv "$0" "$progdir/Zerotier-已关闭.sh"
-        [ $LANG_CUR -eq 3 ] && mv "$0" "$progdir/Zerotier-閉じる.sh"
-        [ $LANG_CUR -eq 2 ] && mv "$0" "$progdir/Zerotier-OFF.sh"
+        mv "$0" "$progdir/Zerotier-已关闭.sh"
     fi
 }
 
@@ -101,71 +103,43 @@ pkill -f mpv
 pkill -f evtest
 if type zerotier-one >/dev/null 2>&1; then
     # 显示开关图片
-    mpv $rotate_28 --really-quiet --image-display-duration=6000 "${progdir}/res/zt-${LANG_CUR}.png" &
+    mpv --really-quiet --image-display-duration=6000 "${progdir}/res/zt-0.png" &
 else
     # 显示安装zt图片
-    mpv $rotate_28 --really-quiet --image-display-duration=6000 "${progdir}/res/ztnone-${LANG_CUR}.png" &
+    mpv --really-quiet --image-display-duration=6000 "${progdir}/res/ztnone-0.png" &
 fi
-get_devices
 
-(
-     for INPUT_DEVICE in ${INPUT_DEVICES[@]}
-     do
-     evtest "${INPUT_DEVICE}" 2>&1 &
-     done
-     wait
-) | while read line; do
-    case $line in
-        (${CONTROLLER_DISCONNECTED})
-        echo "Reloading due to ${CONTROLLER_DEVICE} reattach..." 2>&1
-        get_devices
-        ;;
-        (${DEVICE_DISCONNECTED})
-        echo "Reloading due to ${DEVICE} reattach..." 2>&1
-        get_devices
-        ;;
-        (${X_KEY})
-            if [[ "${line}" =~ ${PRESS} ]]; then
-                continue
-            elif [[ "${line}" =~ ${RELEASE} ]]; then
-                pkill -f mpv
-                install_zt $1
-            fi
-        ;;
-        (${A_KEY})
-            if [[ "${line}" =~ ${PRESS} ]]; then
-                continue
-            elif [[ "${line}" =~ ${RELEASE} ]]; then
-                pkill -f mpv
-                disable_zt $1
-                user_quit
-            fi
-        ;;
-        (${Y_KEY})
-            if [[ "${line}" =~ ${PRESS} ]]; then
-                continue
-            elif [[ "${line}" =~ ${RELEASE} ]]; then
-                pkill -f mpv
-                enable_zt $1
-                user_quit
-            fi
-        ;;
-        (${B_KEY})
-            if [[ "${line}" =~ ${PRESS} ]]; then
-                continue
-            elif [[ "${line}" =~ ${RELEASE} ]]; then
-                pkill -f mpv
-                leave_zt $1
-                user_quit
-            fi
-        ;;
-        (${FUNC_KEY_EVENT})
-            if [[ "${line}" =~ ${PRESS} ]]; then
-                continue
-            elif [[ "${line}" =~ ${RELEASE} ]]; then
-                status_zt $1
-                user_quit
-            fi
-        ;;
-    esac
+while true
+do
+    Test_Button_A
+    if [ "$?" -eq "10" ]; then
+        pkill -f mpv
+        disable_zt $1
+        break
+    fi
+    Test_Button_B
+    if [ "$?" -eq "10" ]; then
+        pkill -f mpv
+        leave_zt $1
+        break
+    fi
+    Test_Button_X
+    if [ "$?" -eq "10" ]; then
+        pkill -f mpv
+        install_zt $1
+    fi
+    Test_Button_Y
+    if [ "$?" -eq "10" ]; then
+        pkill -f mpv
+        enable_zt $1
+        break
+    fi
+    Test_Button_FUNC
+    if [ "$?" -eq "10" ]; then
+        status_zt $1
+        break
+    fi
 done
+pkill -f mpv
+pkill -f evtest
+exit 0
