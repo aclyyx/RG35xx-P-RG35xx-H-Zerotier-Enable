@@ -23,10 +23,22 @@
 ## 下载程序代码并运行它
 
 1. 下载本项目中的 [RG35xxH](https://github.com/aclyyx/RG35xx-P-RG35xx-H-Zerotier-Enable/tree/main/RG35xxH) 文件夹里的内容；
+
 2. 编辑 `RG35xxH` 文件夹中的 `zt-network-id.txt`文件，将 Zerotier 的`网络ID`(`NETWORK ID`)写在里面并保存；
+
 3. 将下载的文件及文件夹拷贝到 TF1 或 TF2 存储卡的 `/Roms/APPS`文件夹中；
+
 4. 插卡开机；
-5. 在用户界面选择`APPS`->`APPS`->选择对应的存储卡->`Zerotier-已关闭`并运行；
-6. 等待运行完成即可。
-7. 如果是第一次加入 ZT 网络，需要登录 Zerotier 官网，在 ZT 网络的`Members`选项卡中允许连入。
+
+5. 在用户界面选择`APPS`->`APPS`->选择对应的存储卡->`Zerotier`并运行；
+
+6. 根据界面提示进行操作；
+
+   ![操作界面](./RG35xxh/res/ztnone-0.png)
+
+   ![操作界面](./RG35xxh/res/zt-0.png)
+
+7. 如果是第一次加入 Zerotier 网络，需要登录 Zerotier 官网，在 ZT 网络的`Members`选项卡中允许连入；
+
+8. 在`离开并删除 Zerotier`后，再次安装 Zerotier 同样需要登录 Zerotier 官网，在 ZT 网络的`Members`选项卡中允许连入。
 
