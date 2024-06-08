@@ -34,9 +34,9 @@
 
 6. 根据界面提示进行操作；
 
-   ![操作界面](./RG35xxh/res/ztnone-0.png)
+   ![操作界面](./RG35xxH/res/ztnone-0.png)
 
-   ![操作界面](./RG35xxh/res/zt-0.png)
+   ![操作界面](./RG35xxH/res/zt-0.png)
 
 7. 如果是第一次加入 Zerotier 网络，需要登录 Zerotier 官网，在 ZT 网络的`Members`选项卡中允许连入；
 
