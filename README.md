@@ -6,6 +6,8 @@
 
 ## 写在前面
 
+通过 Zerotier 实现身在不同地方的玩家进行局域网联机，连接效果是网络而定。
+
 首先，你需要了解什么是 Zerotier，Zerotier 是一个远程组建局域网的解决方案，而且它是跨平台的，不仅可以在 Windows、MacOS、iOS、Android，也可以在 Linux 上安装运行。
 
 而开源掌机也多数是以 Linux 核心作为基础进行开发、发布的；周哥的 Anbernic 35xx 系列同样也是基于 Linux 内核的 Ubuntu 进行扩展开发的。
